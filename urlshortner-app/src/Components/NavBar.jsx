@@ -5,10 +5,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function NavScrollExample() {
+function NavScrollExample({children}) {
     return (
         <>
-           <nav className="navbar navbar-expand-lg bg-dark border-bottom border-body vw-100" data-bs-theme="dark">
+           <nav className="navbar navbar-expand-lg bg-dark border-bottom border-body  " data-bs-theme="dark" style={{
+        
+
+           }}>
   <div className="container-fluid">
     <a className="navbar-brand" href="#">Navbar</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,9 +36,9 @@ function NavScrollExample() {
             <li><a className="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        </li> */}
       </ul>
       <form className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
@@ -44,7 +47,7 @@ function NavScrollExample() {
     </div>
   </div>
 </nav>
-
+{children}
         </>
      
     );
