@@ -13,37 +13,27 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
-import { LoginUser } from '../Services/apiService';
-import { NameContext } from '../Context/context';
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Login() {
+export default function Forget() {
 
-  const {currentUser, setCurrentUser}=useContext (NameContext);
+
   const [user,setUser]=useState({
+    firstName:"",
+    lastName:"" ,
     email:"",
     password:"" 
   
-  });
-  const navigate=useNavigate();
+  })
   
   const handleSubmit = async(event) => {
     event.preventDefault();
     try {
-     console.log(user)
-   const response = await LoginUser(user);
-   document.getElementById('login-form').reset();
-   console.log(response);
-   if(response.status){
-   setCurrentUser({email:user.email,token:response.data.jwttoken});
-   localStorage.setItem("token",`${response.data.jwttoken}`);
-      console.log({...currentUser});
-      navigate('/home')
-   }
 
+      
     } catch (error) {
       console.log(error)
       
@@ -84,7 +74,6 @@ export default function Login() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  onChange={(e)=>setUser({...user,[e.target.name]: e.target.value })}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -96,7 +85,6 @@ export default function Login() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  onChange={(e)=>setUser({...user,[e.target.name]: e.target.value })}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -112,12 +100,12 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign in
+              Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/register" variant="body2">
-                  Don't have account? Create new
+                <Link href="#" variant="body2">
+                  Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>

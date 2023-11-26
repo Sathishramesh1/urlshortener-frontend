@@ -2,8 +2,25 @@ import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { CreateShortUrl } from '../Services/apiService';
 
 function MyVerticallyCenteredModal(props) {
+const [longUrl,setLongUrl]=useState({})
+
+const handleCreate=async()=>{
+
+try {
+  const token=localStorage.getItem('token');
+console.log(token,longUrl)
+  const response=await CreateShortUrl(longUrl,token);
+  
+  console.log(response);
+} catch (error) {
+  console.log(error)
+}
+
+}
+
   return (
     <Modal
       {...props}
@@ -21,7 +38,7 @@ function MyVerticallyCenteredModal(props) {
         <Form>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
         <Form.Label>Long Url</Form.Label>
-        <Form.Control type="text" placeholder="https://www.google.com/" />
+        <Form.Control type="text" placeholder="https://www.google.com/" name='longUrl' onChange={(e)=>{setLongUrl({[e.target.name]:e.target.value})}}/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
         <Form.Label>Title</Form.Label>
@@ -30,7 +47,7 @@ function MyVerticallyCenteredModal(props) {
     </Form>
       </Modal.Body>
       <Modal.Footer>
-      <Button>Create</Button>
+      <Button onClick={handleCreate}>Create</Button>
         <Button onClick={props.onHide} variant='danger'>Close</Button>
         
       </Modal.Footer>
@@ -40,6 +57,8 @@ function MyVerticallyCenteredModal(props) {
 
 function Model() {
     const [modalShow, setModalShow] = useState(false);  
+
+
   return (
     <>
       <Button variant="success" onClick={() => setModalShow(true)}>

@@ -4,11 +4,12 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import {ResponsiveAppBar} from './MuiAppbar';
 
 function NavScrollExample({children}) {
     return (
         <>
-           <nav className="navbar navbar-expand-lg bg-dark border-bottom border-body  " data-bs-theme="dark" style={{
+           {/* <nav className="navbar navbar-expand-lg bg-dark border-bottom border-body  " data-bs-theme="dark" style={{
         
 
            }}>
@@ -36,17 +37,17 @@ function NavScrollExample({children}) {
             <li><a className="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
-        {/* <li className="nav-item">
-          <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li> */}
+       
       </ul>
       <form className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button className="btn btn-outline-success" type="submit">Search</button>
       </form>
+      <div>hello</div>
     </div>
   </div>
-</nav>
+</nav> */}
+<ResponsiveAppBar/>
 {children}
         </>
      
