@@ -114,12 +114,20 @@ export default function Login() {
             >
               Sign in
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent="space-between">
               <Grid item>
                 <Link href="/register" variant="body2">
                   Don't have account? Create new
                 </Link>
+                
               </Grid>
+              <Grid item>
+                <Link href="/forget" variant="body2">
+                  Forget Password?
+                </Link>
+                
+              </Grid>
+              
             </Grid>
           </Box>
         </Box>

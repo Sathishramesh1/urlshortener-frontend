@@ -10,6 +10,11 @@ import ActivationPage from './Pages/ActivationPage.jsx'
 import { useContext } from 'react'
 import { NameContext } from './Context/context.jsx'
 import { BeatLoader } from 'react-spinners'
+import Daily from './Pages/Daily.jsx'
+import Monthly from './Pages/Monthly.jsx'
+import Forget from './Pages/Forget.jsx'
+import { ResetTvSharp } from '@mui/icons-material'
+import Reset from './Pages/Reset.jsx'
 
 const Login=lazy(() => import('./Pages/Login.jsx'));
 
@@ -42,7 +47,12 @@ function App() {
           <Route path='/register' element={<SignUp/>} />
           <Route path='/home' element={currentUser.token? (<Home/>) :(<Navigate to='/'></Navigate>)}/>
           <Route path='/allurl' element={<AllUrl/>}/>
+          <Route path='/daily' element={<Daily/>}/>
+          <Route path='/monthly' element={<Monthly/>}/>
+          
           <Route path='/activate/:activationKey' element={<ActivationPage/>}/> 
+          <Route path='/forget' element={<Forget/>}/>
+          <Route path='/reset/:resetToken' element={<Reset/>}/>
         </Routes>
       </BrowserRouter>
       </div>

@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,7 +10,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { ResetPassword } from '../Services/apiService';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -20,19 +20,19 @@ const defaultTheme = createTheme();
 
 export default function Reset() {
 
-
+  const {resetToken}=useParams();
   const [user,setUser]=useState({
-    firstName:"",
-    lastName:"" ,
-    email:"",
     password:"" 
   
   })
   
   const handleSubmit = async(event) => {
     event.preventDefault();
+    
     try {
-
+document.getElementById('reset-form').reset();
+const response = await ResetPassword(user,resetToken);
+console.log(response);
       
     } catch (error) {
       console.log(error)
@@ -40,6 +40,7 @@ export default function Reset() {
     }
    
   };
+
 
   return (
     <div
@@ -61,21 +62,12 @@ export default function Reset() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Reset Password
           </Typography>
-          <Box component="form"  onSubmit={handleSubmit} sx={{ mt: 3 }} id='login-form'>
+          <Box component="form"  onSubmit={handleSubmit} sx={{ mt: 3 }} id='reset-form'>
             <Grid container spacing={2}>
              
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
+              
               <Grid item xs={12}>
                 <TextField
                   required
@@ -85,13 +77,12 @@ export default function Reset() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(e)=>setUser({...user,[e.target.name]: e.target.value })}
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="Remember me"
-                />
+              <Typography color="red">Enter new Password</Typography>
+               
               </Grid>
             </Grid>
             <Button
@@ -100,11 +91,11 @@ export default function Reset() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Submit
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

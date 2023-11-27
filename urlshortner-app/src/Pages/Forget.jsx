@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
+import { ForgetPassword } from '../Services/apiService';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -22,17 +23,19 @@ export default function Forget() {
 
 
   const [user,setUser]=useState({
-    firstName:"",
-    lastName:"" ,
+    
     email:"",
-    password:"" 
   
   })
   
   const handleSubmit = async(event) => {
     event.preventDefault();
     try {
-
+  const response=await ForgetPassword(user);
+  
+  if(response.data.status==201){
+    
+  }
       
     } catch (error) {
       console.log(error)
@@ -61,9 +64,9 @@ export default function Forget() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Forget Password
           </Typography>
-          <Box component="form"  onSubmit={handleSubmit} sx={{ mt: 3 }} id='login-form'>
+          <Box component="form"  onSubmit={handleSubmit} sx={{ mt: 3 }} id='reset-form'>
             <Grid container spacing={2}>
              
               <Grid item xs={12}>
@@ -74,24 +77,13 @@ export default function Forget() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={(e)=>setUser({...user,[e.target.name]: e.target.value })}
                 />
               </Grid>
+              
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="Remember me"
-                />
+              <Typography color='red'>Enter Registered Email Address</Typography>
+                
               </Grid>
             </Grid>
             <Button
@@ -100,11 +92,11 @@ export default function Forget() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Send Reset Link
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

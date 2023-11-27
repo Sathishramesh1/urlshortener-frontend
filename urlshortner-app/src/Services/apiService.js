@@ -26,8 +26,8 @@ export const ForgetPassword = async (payload) => {
     return response;
 };
 
-export const ResetPassword = async (payload) => {
-    const response = await axios.post(`${BASE_URL}/user/reset`, payload);
+export const ResetPassword = async (payload,resetToken) => {
+    const response = await axios.post(`${BASE_URL}/user/reset/${resetToken}`, payload);
     return response;
 };
 
