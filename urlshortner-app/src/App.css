@@ -25,7 +25,7 @@
 .home{
   display: flex;
   width:100vw;
-/* height:100vh; */
+height:75vh;
 justify-content: center;
  
 flex-wrap: wrap;
@@ -46,14 +46,30 @@ flex-wrap: wrap;
   flex-direction: column;
   margin-top: 5vw;
 }
-#dashboard{
-  background-image:none;
- 
-  
-}
-.dashboard-count{
-   border: 1px solid red;
-   margin-right:1rem;
-   height: auto;
 
+.dashboard-count{
+  
+   margin-right:1rem;
+   /* height:max-content; */
+aspect-ratio: 1/1;
+		animation-name: focus-in-contract;
+		animation-duration: 1s;
+		animation-timing-function: linear;
+		animation-delay: 0s;
+		animation-iteration-count: 1;
+		animation-direction: normal;
+		animation-fill-mode: none;
+
+}
+@keyframes focus-in-contract {
+			
+  0% {
+    letter-spacing:1em;
+    filter:blur(12px);
+    opacity:0;
+  }
+  100% {
+    filter:blur(0);
+    opacity:1;
+  }
 }

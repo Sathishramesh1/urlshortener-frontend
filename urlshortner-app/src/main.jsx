@@ -13,10 +13,12 @@ const App=lazy(() => import('./App.jsx'));
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
   <NameProvider>
-  <Suspense fallback={<div ><BeatLoader
+  <Suspense fallback={<div style={{marginLeft:'50vw'}}><BeatLoader
   color="#36d7b7"
   size={35}
-/></div>}>
+ 
+/>
+</div>}>
       <App />
    </Suspense>
     </NameProvider>

@@ -8,7 +8,7 @@ function MyVerticallyCenteredModal(props) {
 const [longUrl,setLongUrl]=useState({})
 
 const handleCreate=async()=>{
-
+    props.onHide();
 try {
   const token=localStorage.getItem('token');
 console.log(token,longUrl)
@@ -30,20 +30,17 @@ console.log(token,longUrl)
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          Create Short Url
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
+       
         <Form>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
         <Form.Label>Long Url</Form.Label>
         <Form.Control type="text" placeholder="https://www.google.com/" name='longUrl' onChange={(e)=>{setLongUrl({[e.target.name]:e.target.value})}}/>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-        <Form.Label>Title</Form.Label>
-        <Form.Control  type="text" placeholder="title"/>
-      </Form.Group>
+    
     </Form>
       </Modal.Body>
       <Modal.Footer>

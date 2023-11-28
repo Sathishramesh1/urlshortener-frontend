@@ -4,7 +4,7 @@ import { createContext, useState, useContext } from "react";
 const NameContext = createContext();
 
 const NameProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState({ email:"",token:null});
+  const [currentUser, setCurrentUser] = useState({ email:"",token:localStorage.getItem('token')||null});
  
   
 

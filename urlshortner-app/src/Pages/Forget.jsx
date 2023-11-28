@@ -14,6 +14,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { ForgetPassword } from '../Services/apiService';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -31,14 +33,41 @@ export default function Forget() {
   const handleSubmit = async(event) => {
     event.preventDefault();
     try {
+      document.getElementById('forget-form').reset();
+      
+      toast.loading(<div>Fetching data</div>,{
+        position:toast.POSITION.TOP_CENTER
+       })
   const response=await ForgetPassword(user);
+  toast.dismiss();
   
-  if(response.data.status==201){
+  if(response.status){
+    toast.success('Password reset mail sent!', {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
     
   }
       
     } catch (error) {
-      console.log(error)
+      toast.dismiss();
+      console.log(error);
+      toast.error('Unable to send mail', {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       
     }
    
@@ -66,7 +95,7 @@ export default function Forget() {
           <Typography component="h1" variant="h5">
             Forget Password
           </Typography>
-          <Box component="form"  onSubmit={handleSubmit} sx={{ mt: 3 }} id='reset-form'>
+          <Box component="form"  onSubmit={handleSubmit} sx={{ mt: 3 }} id='forget-form'>
             <Grid container spacing={2}>
              
               <Grid item xs={12}>

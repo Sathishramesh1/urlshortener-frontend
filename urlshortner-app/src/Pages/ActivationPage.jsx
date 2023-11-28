@@ -12,7 +12,10 @@ useEffect(()=>{
 const fetchdata=async()=>{
     try {
         const response = await ActivateUser(activationKey);
-        console.log(response)
+        if(response.status){
+            setActivate(true)
+        }
+        
     } catch (error) {
         console.log(error);
     }
@@ -27,8 +30,8 @@ fetchdata();
   return (
    <>
    <div>
-    {activated?(<h1>loading</h1>):(<h1>
-   activated
+    {activated?(<h1>activated</h1>):(<h1>
+please wait while verifying 
     </h1>)}
 
    </div>

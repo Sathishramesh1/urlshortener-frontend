@@ -17,6 +17,10 @@ import { LoginUser } from '../Services/apiService';
 import { NameContext } from '../Context/context';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
@@ -33,18 +37,44 @@ export default function Login() {
   const handleSubmit = async(event) => {
     event.preventDefault();
     try {
-     console.log(user)
+      document.getElementById('login-form').reset();
+     toast.loading(<div>Fetching data</div>,{
+      position:toast.POSITION.TOP_CENTER
+     })
    const response = await LoginUser(user);
-   document.getElementById('login-form').reset();
+   toast.dismiss();
+  
    console.log(response);
    if(response.status){
+    toast.success('Login Successful!', {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
    setCurrentUser({email:user.email,token:response.data.jwttoken});
    localStorage.setItem("token",`${response.data.jwttoken}`);
+   localStorage.setItem("email",`${user.email}`)
       console.log({...currentUser});
       navigate('/home')
    }
 
     } catch (error) {
+      toast.dismiss();
+      toast.error('Unable to Login', {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       console.log(error)
       
     }

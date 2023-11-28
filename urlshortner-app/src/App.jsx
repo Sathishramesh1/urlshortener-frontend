@@ -15,20 +15,19 @@ import Monthly from './Pages/Monthly.jsx'
 import Forget from './Pages/Forget.jsx'
 import { ResetTvSharp } from '@mui/icons-material'
 import Reset from './Pages/Reset.jsx'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Redirect from './Pages/Redirect.jsx'
 
 const Login=lazy(() => import('./Pages/Login.jsx'));
 
 
 function App() {
   
- const {currentUser}=useContext(NameContext)
+  const {currentUser}=useContext (NameContext);
 
   return (
        <>
-      {/* <div className='container base'> 
-      
-       
-       </div>  */}
        <div style={{
         display:'flex',
         flexDirection:'column',
@@ -38,12 +37,7 @@ function App() {
 
 
         <Routes>
-          <Route exact path='/' element={<Suspense fallback={<div>
-            <BeatLoader
-  color="#36d7b7"
-  size={35}
-/>
-          </div>}><Login/> </Suspense>}/>
+          <Route exact path='/' element={<Suspense><Login/> </Suspense>}/>
           <Route path='/register' element={<SignUp/>} />
           <Route path='/home' element={currentUser.token? (<Home/>) :(<Navigate to='/'></Navigate>)}/>
           <Route path='/allurl' element={<AllUrl/>}/>
@@ -53,7 +47,9 @@ function App() {
           <Route path='/activate/:activationKey' element={<ActivationPage/>}/> 
           <Route path='/forget' element={<Forget/>}/>
           <Route path='/reset/:resetToken' element={<Reset/>}/>
+          <Route path='/:shortUrl' element={<Redirect/>}/>
         </Routes>
+        <ToastContainer/>
       </BrowserRouter>
       </div>
        </>

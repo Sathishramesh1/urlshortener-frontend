@@ -14,6 +14,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { RegisterUser } from '../Services/apiService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -31,16 +33,43 @@ export default function SignUp() {
   const handleSubmit = async(event) => {
     event.preventDefault();
     try { 
-      const response=await RegisterUser(user);
       document.getElementById('my-form').reset();
+      toast.loading(<div>oaduing</div>,{
+        position:toast.POSITION.TOP_CENTER
+       });
+      const response=await RegisterUser(user);
+      toast.dismiss();
+      if(response.status){
+        toast.success('Registration Successful!', {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+
       setUser({ firstName:"",
       lastName:"" ,
       email:"",
       password:"" });
       console.log(response);
-
+      }
     } catch (error) {
-      console.log(error,"unable to register user")
+      toast.dismiss();
+      console.log(error,"unable to register user");
+      toast.error('Unable to Register', {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       
     }
   

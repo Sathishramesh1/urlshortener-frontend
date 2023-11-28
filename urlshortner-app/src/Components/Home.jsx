@@ -14,6 +14,7 @@ function Home() {
     try {
       const token=localStorage.getItem('token')
       const response=await getDashboard(token);
+      
     if(response.status){
       setDashBoard({today:response.data.todayUrlList,monthly:response.data.thisMonthUrlList})
     }
@@ -43,11 +44,11 @@ datafetch();
     <Container className='mt-5 border border-black h-75'>
     <Row><h2>Dashboard</h2></Row>
       <Row>
-        <Col className='dashboard-count'><h3 >today</h3>
+        <Col className='dashboard-count'><h3 >Daily Count</h3>
         <Col><h1>{dashboard.today}</h1></Col>
         
         </Col>
-        <Col className='dashboard-count'><h3 >Month</h3>
+        <Col className='dashboard-count'><h3 >Monthly Count</h3>
         <Col><h1>{dashboard.monthly}</h1></Col>
         </Col>
       </Row>

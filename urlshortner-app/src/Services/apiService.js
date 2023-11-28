@@ -46,7 +46,7 @@ export const GetTodayUrl = async (authToken) => {
         'x-auth-token': authToken,
         'Content-Type': 'application/json', 
     };
-    const response = await axios.get(`${BASE_URL}/user/getTodayUrl`,{headers});
+    const response = await axios.get(`${BASE_URL}/url/getTodayUrl`,{headers});
     return response;
 };
 export const GetMonthlyUrl = async (authToken) => {
@@ -77,8 +77,16 @@ export const getDashboard = async (authToken) => {
 };
 
 
-export const Redirect = async () => {
-    const response = await axios.get(`${BASE_URL}/ShortUrl`);
+export const getRedirect = async (shortUrl) => {
+    const response = await axios.get(`${BASE_URL}/${shortUrl}`,{
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Credentials':'*',
+        
+        },
+        mode: 'cors',
+        
+    });
     return response;
 };
 
