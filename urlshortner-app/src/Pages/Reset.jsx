@@ -11,8 +11,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState,useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ResetPassword } from '../Services/apiService';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -21,26 +24,58 @@ const defaultTheme = createTheme();
 export default function Reset() {
 
   const {resetToken}=useParams();
+  const navigate=useNavigate();
   const [user,setUser]=useState({
     password:"" 
   
   })
   
-  const handleSubmit = async(event) => {
-    event.preventDefault();
-    
-    try {
-document.getElementById('reset-form').reset();
-const response = await ResetPassword(user,resetToken);
-console.log(response);
-      
-    } catch (error) {
-      console.log(error)
-      
-    }
-   
-  };
 
+  
+    const handleSubmit = async(event) => {
+      event.preventDefault();
+      
+      try {
+  document.getElementById('reset-form').reset();
+  const response = await ResetPassword(user,resetToken);
+  console.log(response);
+  
+  if(response.status){
+    toast.success(`${response.data.message}`, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+  navigate('/')
+  
+  }
+        
+  } catch (error) {
+        console.log(error);
+        toast.error('Unable to reset password', {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+        
+        
+      }
+     
+    };
+  
+
+
+  
 
   return (
     <div

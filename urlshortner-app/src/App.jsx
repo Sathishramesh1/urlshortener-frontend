@@ -3,7 +3,6 @@ import { lazy, useState ,Suspense} from 'react'
 import './App.css'
 import Home from './Components/Home'
 import {BrowserRouter,Navigate,Route,Routes} from 'react-router-dom'
-// import Login from './Pages/Login.jsx'
 import SignUp from './Pages/Register.jsx'
 import AllUrl from './Pages/AllUrl.jsx'
 import ActivationPage from './Pages/ActivationPage.jsx'
@@ -18,6 +17,7 @@ import Reset from './Pages/Reset.jsx'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Redirect from './Pages/Redirect.jsx'
+import ErrorPage from './Pages/ErrorPage.jsx'
 
 const Login=lazy(() => import('./Pages/Login.jsx'));
 
@@ -48,6 +48,7 @@ function App() {
           <Route path='/forget' element={<Forget/>}/>
           <Route path='/reset/:resetToken' element={<Reset/>}/>
           <Route path='/:shortUrl' element={<Redirect/>}/>
+          <Route path='*' element={<ErrorPage/>}/>
         </Routes>
         <ToastContainer/>
       </BrowserRouter>

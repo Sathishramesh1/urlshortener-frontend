@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { getRedirect } from '../Services/apiService';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Redirect() {
 const {shortUrl}=useParams();
+const navigate=useNavigate();
 useEffect(()=>{
 const fetchdata=async()=>{
     try {
@@ -17,8 +18,6 @@ const fetchdata=async()=>{
 
         }
        
-      
-        
        } catch (error) {
         console.log(error)
         
@@ -29,7 +28,10 @@ fetchdata();
 
 
   return (
-    <div>Redirect</div>
+    <div>
+    {alert("Redirecting another page")}
+      <h1>Redirecting to Another Page</h1>
+    </div>
   )
 }
 

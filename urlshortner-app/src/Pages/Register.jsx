@@ -16,11 +16,13 @@ import { useState } from 'react';
 import { RegisterUser } from '../Services/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+  const navigate=useNavigate();
 
    const [user,setUser]=useState({
     firstName:"",
@@ -34,7 +36,7 @@ export default function SignUp() {
     event.preventDefault();
     try { 
       document.getElementById('my-form').reset();
-      toast.loading(<div>oaduing</div>,{
+      toast.loading(<div>Fetching data</div>,{
         position:toast.POSITION.TOP_CENTER
        });
       const response=await RegisterUser(user);
@@ -55,6 +57,8 @@ export default function SignUp() {
       lastName:"" ,
       email:"",
       password:"" });
+      navigate('/')
+      
       console.log(response);
       }
     } catch (error) {

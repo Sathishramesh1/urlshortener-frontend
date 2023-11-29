@@ -65,7 +65,8 @@ export default function Login() {
 
     } catch (error) {
       toast.dismiss();
-      toast.error('Unable to Login', {
+    
+      toast.error(`${error.response.data.message}`, {
         position: "top-right",
         autoClose: 1500,
         hideProgressBar: false,
